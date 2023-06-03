@@ -35,9 +35,6 @@ public class Carrito {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_carrito", nullable = false)
     private Long id;
-
-    @Column(name= "es_Vip", nullable = false)
-    private Boolean esVip;
     
     @Enumerated(EnumType.STRING)
     @Column(name = "tipoCarrito")
