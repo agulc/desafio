@@ -6,9 +6,13 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.agulc.apidanaide.entities.Carrito;
+import com.agulc.apidanaide.entities.Compra;
+import com.agulc.apidanaide.entities.Producto;
 import com.agulc.apidanaide.entities.Usuario;
 import com.agulc.apidanaide.entities.types.TipoCarrito;
 import com.agulc.apidanaide.repositories.CarritoRepository;
+import com.agulc.apidanaide.repositories.CompraRepository;
+import com.agulc.apidanaide.repositories.ProductoRepository;
 import com.agulc.apidanaide.repositories.UsuarioRepository;
 import com.agulc.apidanaide.services.CarritoService;
 
@@ -20,6 +24,8 @@ public class CarritoServiceImpl implements CarritoService {
 
     private CarritoRepository carritoRepository;
     private UsuarioRepository usuarioRepository;
+    private ProductoRepository productoRepository;
+    private CompraRepository compraRepository;
 
     @Override
     public Long createCarrito(Long dniUsuario) {
@@ -56,13 +62,48 @@ public class CarritoServiceImpl implements CarritoService {
     @Override
     public Carrito addProductoToCarrito(Long idCarrito, Long idProducto) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addProductoToCarrito'");
+        Optional<Carrito> existingCarrito = carritoRepository.findById(idCarrito);
+        Optional<Producto> existingProducto = productoRepository.findById(idProducto);
+        Optional<Compra> existingCompra = compraRepository.findByCarritoAndProducto(existingCarrito.get(), existingProducto.get());
+        
+        if (existingCompra.isPresent() && existingCarrito.isPresent()){
+            Compra compra = existingCompra.get();
+            compra.setCantidad(compra.getCantidad() + 1);
+            compraRepository.save(compra);
+            //Carrito carrito = existingCarrito.get();
+            return null;
+        }
+
+        if (existingCarrito.isPresent() && existingProducto.isPresent()){
+            Compra compra = new Compra(null, 1L, existingCarrito.get(), existingProducto.get());
+            compraRepository.save(compra);
+            return null;
+        }
+
+        return null;
     }
 
     @Override
     public Carrito removeProductoFromCarrito(Long idCarrito, Long idProducto) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeProductoFromCarrito'");
+        Optional<Carrito> existingCarrito = carritoRepository.findById(idCarrito);
+        Optional<Producto> existingProducto = productoRepository.findById(idProducto);
+        Optional<Compra> existingCompra = compraRepository.findByCarritoAndProducto(existingCarrito.get(), existingProducto.get());
+        
+        if (existingCompra.isPresent() && existingCarrito.isPresent()){
+            Compra compra = existingCompra.get();
+            compra.setCantidad(compra.getCantidad() - 1);
+            if (compra.getCantidad() <= 0){
+                compraRepository.delete(compra);
+            }
+            else{
+                compraRepository.save(compra);
+            }
+            //Carrito carrito = existingCarrito.get();
+            return null;
+        }
+
+        return null;
     }
 
     @Override

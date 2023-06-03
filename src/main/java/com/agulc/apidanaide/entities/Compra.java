@@ -12,11 +12,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Entity
 @Table(name = "compras")
 public class Compra {
@@ -27,7 +29,7 @@ public class Compra {
     private Long id;
 
     @Column(name = "cantidad")
-    private Integer cantidad;
+    private Long cantidad;
 
     @ManyToOne
     @JoinColumn(name = "fk_carrito", nullable = false)

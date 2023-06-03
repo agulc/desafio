@@ -19,6 +19,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 
 @Getter
@@ -44,4 +45,8 @@ public class Carrito {
 
     @OneToMany(mappedBy = "carrito"/*, cascade = CascadeType.REMOVE, orphanRemoval = true*/)
     private Set<Compra> compras;
+
+    public String toString(){
+        return "{'id': 2, 'tipoCarrito': 'vip' }";
+    }
 }
