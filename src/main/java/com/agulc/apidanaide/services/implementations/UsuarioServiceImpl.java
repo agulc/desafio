@@ -2,11 +2,20 @@ package com.agulc.apidanaide.services.implementations;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.agulc.apidanaide.entities.Producto;
 import com.agulc.apidanaide.entities.Usuario;
+import com.agulc.apidanaide.repositories.UsuarioRepository;
 import com.agulc.apidanaide.services.UsuarioService;
 
+import lombok.AllArgsConstructor;
+
+@Service
+@AllArgsConstructor
 public class UsuarioServiceImpl implements UsuarioService{
+
+    private UsuarioRepository usuarioRepository;
 
     @Override
     public Usuario crearUsuario(Usuario usuario) {

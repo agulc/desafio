@@ -6,7 +6,7 @@ import com.agulc.apidanaide.entities.Carrito;
 
 public interface CarritoService {
     
-    Long crearCarrito(Long dniUsuario); // returns ID carrito
+    Long createCarrito(Long dniUsuario); // returns ID carrito
 
     Carrito getCarritoById(Long idCarrito);
 
