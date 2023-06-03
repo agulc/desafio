@@ -1,5 +1,7 @@
 package com.agulc.apidanaide.entities;
 
+import java.util.Set;
+
 import com.agulc.apidanaide.entities.types.TipoCarrito;
 
 import jakarta.persistence.Column;
@@ -9,6 +11,9 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Max;
@@ -28,7 +33,7 @@ public class Carrito {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id_carrito", nullable = false)
     private Long id;
 
     @Column(name= "es_Vip", nullable = false)
@@ -37,4 +42,11 @@ public class Carrito {
     @Enumerated(EnumType.STRING)
     @Column(name = "tipoCarrito")
     private TipoCarrito tipo;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_usuario", nullable = false)
+    private Usuario usuario;
+
+    @OneToMany(mappedBy = "carrito")
+    private Set<Compra> compras;
 }
