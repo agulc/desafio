@@ -15,8 +15,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Max;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -44,6 +42,6 @@ public class Carrito {
     @JoinColumn(name = "fk_usuario", nullable = false)
     private Usuario usuario;
 
-    @OneToMany(mappedBy = "carrito")
+    @OneToMany(mappedBy = "carrito"/*, cascade = CascadeType.REMOVE, orphanRemoval = true*/)
     private Set<Compra> compras;
 }
