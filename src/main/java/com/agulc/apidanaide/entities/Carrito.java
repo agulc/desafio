@@ -2,6 +2,7 @@ package com.agulc.apidanaide.entities;
 
 import java.util.Set;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import org.hibernate.annotations.Comment;
 
@@ -61,14 +62,14 @@ public class Carrito {
     private Set<Compra> compras;
 
     public void agregarPrecio(BigDecimal precio){
-        this.total = this.total.add(precio);
+        this.total = this.total.add(precio.setScale(2, RoundingMode.HALF_UP));
     }
 
     public void restarPrecio(BigDecimal precio){
-        this.total = this.total.subtract(precio);
+        this.total = this.total.subtract(precio.setScale(2, RoundingMode.HALF_UP));
     }
 
     public void guardarDescuento(BigDecimal precio){
-        this.totalConDescuento = precio;
+        this.totalConDescuento = precio.setScale(2, RoundingMode.HALF_UP);
     }
 }

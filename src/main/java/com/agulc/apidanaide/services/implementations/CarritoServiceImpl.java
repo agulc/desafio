@@ -35,7 +35,7 @@ public class CarritoServiceImpl implements CarritoService {
         Optional<Usuario> optUsuario = usuarioRepository.findFirstByDni(dniUsuario);
         Carrito carrito;
         if (optUsuario.isPresent()){
-            boolean fechaEspecial = false;
+            boolean fechaEspecial = true;
             Usuario usuario = optUsuario.get();
             if (usuario.getEsVip()){
                 carrito = new Carrito(null, TipoCarrito.VIP, BigDecimal.valueOf(0.0f), BigDecimal.valueOf(0.0f), usuario, null);
@@ -75,8 +75,6 @@ public class CarritoServiceImpl implements CarritoService {
             Carrito carrito = existingCarrito.get();
             carrito.agregarPrecio(productoRepository.findById(idProducto).get().getPrecio());
             carrito = this.calcularDescuento(carrito);
-            System.out.println(carrito.getTotal());
-            System.out.println(carrito.getTotalConDescuento());
             carritoRepository.save(carrito);
             return carrito;
         }
@@ -87,8 +85,6 @@ public class CarritoServiceImpl implements CarritoService {
             Carrito carrito = existingCarrito.get();
             carrito.agregarPrecio(existingProducto.get().getPrecio());
             carrito = this.calcularDescuento(carrito);
-            System.out.println(carrito.getTotal());
-            System.out.println(carrito.getTotalConDescuento());
             carritoRepository.save(carrito);
             return carrito;
         }
@@ -112,8 +108,11 @@ public class CarritoServiceImpl implements CarritoService {
             else{
                 compraRepository.save(compra);
             }
-            //Carrito carrito = existingCarrito.get();
-            return null;
+            Carrito carrito = existingCarrito.get();
+            carrito.restarPrecio(existingProducto.get().getPrecio());
+            carrito = this.calcularDescuento(carrito);
+            carritoRepository.save(carrito);
+            return carrito;
         }
 
         return null;
@@ -159,7 +158,7 @@ public class CarritoServiceImpl implements CarritoService {
             switch (carrito.getTipo()) {
                 case COMUN:
                     if (total > 200.0f){
-                        carrito.guardarDescuento(BigDecimal.valueOf(total - 500.0f));
+                        carrito.guardarDescuento(BigDecimal.valueOf(total - 200.0f));
                     }
                     break;
                 
