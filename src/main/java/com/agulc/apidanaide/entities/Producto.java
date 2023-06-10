@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 //import java.util.Set;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,7 +18,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
@@ -37,13 +38,8 @@ public class Producto {
     @Column(name = "descripcion")
     private String descripcion;
 
-    @OneToMany(mappedBy = "producto")
-    private Set<Compra> compras;
-
-    @Override
-    public String toString() {
-        return "Producto [precio=" + precio + ", descripcion=" + descripcion + "]";
-    }
-
+/*     @OneToMany(mappedBy = "producto")
+    @JsonManagedReference
+    private Set<Compra> compras; */
     
 }

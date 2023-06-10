@@ -2,6 +2,9 @@ package com.agulc.apidanaide.entities;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 //import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,6 +31,7 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario", nullable = false)
+    @JsonIgnore
     private Long id;
 
     @Column(name = "dni", nullable = false, unique = true)
@@ -39,11 +43,7 @@ public class Usuario {
     private Boolean esVip;
 
     @OneToMany(mappedBy = "usuario"/*, cascade = CascadeType.REMOVE, orphanRemoval = true*/)
+    @JsonManagedReference
     private Set<Carrito> carritos;
-
-    @Override
-    public String toString() {
-        return "Usuario [id=" + id + ", dni=" + dni + ", esVip=" + esVip + ", carritos=" + carritos + "]";
-    }
 
 }

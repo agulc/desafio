@@ -20,9 +20,9 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @GetMapping
-    public ResponseEntity<String> getMethodName(@RequestBody Long id) {
+    public ResponseEntity<Usuario> getMethodName(@RequestBody Long id) {
         Usuario usuario = usuarioService.getUsuarioById(id); 
-        return new ResponseEntity<>(usuario.toString(), HttpStatus.OK) ;
+        return new ResponseEntity<>(usuario, HttpStatus.OK) ;
     }
     
 }

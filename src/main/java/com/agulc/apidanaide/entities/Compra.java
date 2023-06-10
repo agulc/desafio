@@ -1,5 +1,8 @@
 package com.agulc.apidanaide.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,7 +15,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
@@ -25,6 +27,7 @@ public class Compra {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_compra", nullable = false)
+    @JsonIgnore
     private Long id;
 
     @Column(name = "cantidad")
@@ -32,17 +35,11 @@ public class Compra {
 
     @ManyToOne
     @JoinColumn(name = "fk_carrito", nullable = false)
+    @JsonBackReference
     private Carrito carrito;
 
     @ManyToOne
     @JoinColumn(name = "fk_producto", nullable = false)
     private Producto producto;
-
-    @Override
-    public String toString() {
-        return "Compra [cantidad=" + cantidad + ", producto=" + producto + "]";
-    }
-
-    
     
 }

@@ -3,6 +3,9 @@ package com.agulc.apidanaide.entities;
 import java.util.Set;
 
 import com.agulc.apidanaide.entities.types.TipoCarrito;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -41,14 +44,11 @@ public class Carrito {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_usuario", nullable = false)
+    @JsonBackReference
     private Usuario usuario;
 
     @OneToMany(mappedBy = "carrito"/*, cascade = CascadeType.REMOVE, orphanRemoval = true*/)
+    @JsonManagedReference
     private Set<Compra> compras;
-
-    @Override
-    public String toString() {
-        return "Carrito [id=" + id + ", tipo=" + tipo + ", compras=" + compras + "]";
-    }
 
 }
