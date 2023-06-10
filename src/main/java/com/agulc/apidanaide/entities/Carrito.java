@@ -1,6 +1,9 @@
 package com.agulc.apidanaide.entities;
 
 import java.util.Set;
+import java.math.BigDecimal;
+
+import org.hibernate.annotations.Comment;
 
 import com.agulc.apidanaide.entities.types.TipoCarrito;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -42,6 +45,12 @@ public class Carrito {
     @Column(name = "tipoCarrito")
     private TipoCarrito tipo;
 
+    @Column(name = "total", precision = 10, scale = 2)
+    private BigDecimal total;
+
+    @Column(name = "total_descuento", precision = 10, scale = 2)
+    private BigDecimal totalConDescuento;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_usuario", nullable = false)
     @JsonBackReference
@@ -51,4 +60,15 @@ public class Carrito {
     @JsonManagedReference
     private Set<Compra> compras;
 
+    public void agregarPrecio(BigDecimal precio){
+        this.total = this.total.add(precio);
+    }
+
+    public void restarPrecio(BigDecimal precio){
+        this.total = this.total.subtract(precio);
+    }
+
+    public void guardarDescuento(BigDecimal precio){
+        this.totalConDescuento = precio;
+    }
 }
