@@ -3,6 +3,7 @@ package com.agulc.apidanaide.services;
 import com.agulc.apidanaide.entities.Producto;
 import com.agulc.apidanaide.entities.Usuario;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface UsuarioService {
@@ -17,5 +18,5 @@ public interface UsuarioService {
 
     void deleteUsuario(Long idUsuario);
 
-    List<Producto> getFourMostExpensiveProductos(Long dniUsuario);
+    ArrayList<Producto> getFourMostExpensiveProductos(Long dniUsuario);
 }
