@@ -11,9 +11,6 @@ import com.agulc.apidanaide.entities.Carrito;
 import com.agulc.apidanaide.entities.Compra;
 import com.agulc.apidanaide.entities.Producto;
 import com.agulc.apidanaide.entities.Usuario;
-import com.agulc.apidanaide.repositories.CarritoRepository;
-import com.agulc.apidanaide.repositories.CompraRepository;
-import com.agulc.apidanaide.repositories.ProductoRepository;
 import com.agulc.apidanaide.repositories.UsuarioRepository;
 import com.agulc.apidanaide.services.UsuarioService;
 
@@ -23,10 +20,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class UsuarioServiceImpl implements UsuarioService{
 
-    private CarritoRepository carritoRepository;
     private UsuarioRepository usuarioRepository;
-    private ProductoRepository productoRepository;
-    private CompraRepository compraRepository;
 
     @Override
     public Usuario crearUsuario(Usuario usuario) {

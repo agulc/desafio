@@ -4,11 +4,9 @@ import java.util.Set;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import org.hibernate.annotations.Comment;
 
 import com.agulc.apidanaide.entities.types.TipoCarrito;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
@@ -27,7 +25,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
