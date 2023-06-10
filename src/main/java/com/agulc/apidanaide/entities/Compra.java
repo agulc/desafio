@@ -18,7 +18,6 @@ import lombok.ToString;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Entity
 @Table(name = "compras")
 public class Compra {
@@ -39,5 +38,11 @@ public class Compra {
     @JoinColumn(name = "fk_producto", nullable = false)
     private Producto producto;
 
+    @Override
+    public String toString() {
+        return "Compra [cantidad=" + cantidad + ", producto=" + producto + "]";
+    }
+
+    
     
 }

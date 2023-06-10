@@ -8,6 +8,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,7 +21,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
 
 @Getter
 @Setter
@@ -39,14 +39,16 @@ public class Carrito {
     @Column(name = "tipoCarrito")
     private TipoCarrito tipo;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_usuario", nullable = false)
     private Usuario usuario;
 
     @OneToMany(mappedBy = "carrito"/*, cascade = CascadeType.REMOVE, orphanRemoval = true*/)
     private Set<Compra> compras;
 
-    public String toString(){
-        return "{'id': 2, 'tipoCarrito': 'vip' }";
+    @Override
+    public String toString() {
+        return "Carrito [id=" + id + ", tipo=" + tipo + ", compras=" + compras + "]";
     }
+
 }

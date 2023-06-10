@@ -40,4 +40,10 @@ public class Usuario {
 
     @OneToMany(mappedBy = "usuario"/*, cascade = CascadeType.REMOVE, orphanRemoval = true*/)
     private Set<Carrito> carritos;
+
+    @Override
+    public String toString() {
+        return "Usuario [id=" + id + ", dni=" + dni + ", esVip=" + esVip + ", carritos=" + carritos + "]";
+    }
+
 }

@@ -39,9 +39,10 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
 
     @Override
-    public Usuario getUsuarioById(long idUsuario) {
+    public Usuario getUsuarioById(Long idUsuario) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUsuarioById'");
+        Optional<Usuario> optionalUsuario = usuarioRepository.findById(idUsuario);
+        return optionalUsuario.get();
     }
 
     @Override

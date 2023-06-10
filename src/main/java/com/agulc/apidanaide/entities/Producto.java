@@ -3,12 +3,14 @@ package com.agulc.apidanaide.entities;
 
 import java.math.BigDecimal;
 //import java.util.Set;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,7 +22,6 @@ import lombok.ToString;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Entity
 @Table(name = "productos")
 public class Producto {
@@ -36,7 +37,13 @@ public class Producto {
     @Column(name = "descripcion")
     private String descripcion;
 
-   // @OneToMany(mappedBy = "producto")
-   // private Set<Compra> compras;
+    @OneToMany(mappedBy = "producto")
+    private Set<Compra> compras;
 
+    @Override
+    public String toString() {
+        return "Producto [precio=" + precio + ", descripcion=" + descripcion + "]";
+    }
+
+    
 }

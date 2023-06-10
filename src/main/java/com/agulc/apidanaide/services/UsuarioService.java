@@ -9,7 +9,7 @@ public interface UsuarioService {
 
     Usuario crearUsuario(Usuario usuario);
 
-    Usuario getUsuarioById(long idUsuario);
+    Usuario getUsuarioById(Long idUsuario);
 
     List<Usuario> getAllUsuarios();
 
